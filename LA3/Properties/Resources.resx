@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agreement Terms and Conditions" xml:space="preserve">
+    <value>By signing this agreement you agree to repay the loan plus the interest by the payments set out, by their specified dates. Payments must be made to us at the address shown, or to any person or address notified by us in writing.  Punctual payment is essential. If you pay by post you do so at your own risk.  If you already have a loan account with us, the appropriate part of the new loan will be applied in paying off the existing loan, and only the remaining balance will be paid to you.
+
+2. FAILURE TO PAY ON TIME
+We have the right to charge interest at the annual percentage rate shown (less the part attributed to any documentation fee) on all overdue amounts including any balance which may become payable under clause 3 and which remains unpaid on the date for the last payment under this agreement. This interest will be calculated on a daily basis from the date the amount falls due until it is received and will run both before and after any Judgement. We may also charge you for any legal costs and other expenses incurred by us in obtaining payment by you of any sum overdue.
+
+3. RIGHT TO DEMAND EARLIER REPAYMENT
+IF:
+(a) Any amount payable by you is overdue for more than fourteen days, or
+(b) Any statement made by you in the course of obtaining this loan is found to be untrue, or
+(c) You have an interim or bankruptcy order made against you or you petition for your own bankruptcy, or you are served with a creditors demand under the Insolvency Act 1986 or the Banckruptcy (Scotland) Act 1985. Or make a formal composition or scheme with your creditors or call a meeting with them. We have the right to demand earlier payment of the balance of the loan and the interest by sending you a default notice under the COnsumer Credit Act. If you fail to take the action required by this notice within the time specified, the whole of the balance remaining unpaid on the agreement shall become payable immediately. You will become entitled to a rebate of part of the interest if you pay that balance before it would have become due had we not demanded earlier payment.
+
+4. EARLIER REPAYMENT BY YOU
+If you pay off the balance of this agreement before the date of which the final payment falls due you will usually be entitled to a rebate of part of the interest.
+
+5. GENERAL PROVISIONS
+(d) No relaxation or indulgence, which we may extend to you, shall affect our strict rights under this agreement. (e) We may transfer our rights under this agreement. (f) You must notify us in writing within seven days of any change of address. (g) Where two or more of you are named as the borrower you jointly and severally accept the obligations under this Agreement. That means that each of you could be held fully responsible under this agreement.
+
+6. WHEN THIS AGREEMENT TAKES EFFECT
+This Agreement will only take effect if and when it is signed by us or our authorised representative.
+
+This is a credit agreement regulated by the Customer Credit Act 1974. Sign only if you want to be bound legally by its terms.
+
+Signature(s) of Borrower(s)
+
+
+
+Name(s) of Borrower(s). Please Print
+
+
+
+Date of Signature(s)
+
+YOUR RIGHT TO CANCEL
+Once you have signed you will have, for a short time, a right to cancel this Agreement. You can do this by sending or taking a WRITTEN notice of cancellation to Kay Donaldson at R &amp; M Donaldson P.O. Box 11 Heaton, Newcastle Upon Tyne NE7 7YW.
+If you cancel this agreement you must repay all monies lent to you by the lender under this Agreement.
+
+IMPORTANT
+Terms and conditions governing this Agreement are printed above. By signing this Agreement you confirm that you have read, understood and agree to be bound by those terms and conditions.IMPORTANT Terms and conditions governing this Agreement are printed above. By signing this Agreement you confirm that you have read, understood and agree to be bound by those terms and conditions.</value>
+  </data>
+  <data name="TestResourceValue" xml:space="preserve">
+    <value>By signing this agreement you agree to repay the loan plus the interest by the payments set out, by their specified dates. Payments must be made to us at the address shown, or to any person or address notified by us in writing.  Punctual payment is essential. If you pay by post you do so at your own risk.  If you already have a loan account with us, the appropriate part of the new loan will be applied in paying off the existing loan, and only the remaining balance will be paid to you.
+</value>
+  </data>
+  <data name="Agreement_Comment01" xml:space="preserve">
+    <value>The total interest due under this agreement is calculated and added to the sum due at the commencement of this agreement</value>
+  </data>
+  <data name="Agreement_Comment02" xml:space="preserve">
+    <value>We have the right to charge interest at the annual percentage rate shown above, on the overdue amounts (including any balance which may become payable under clause 3) and which remains unpaid at the date for the last payment under this agreement. The interest will be charged on a daily basis from the date the amount falls due until it is received and will run both before and after any Judgement. We may also charge you for any legal costs and other expenses incurred by us in obtaining payment by you of any sum overdue. We may also demand immediate repayment of the entire sum due to us in accordance with clause 3.
+You have the right to pay off the balance of this agreement before the date of which the final payment falls due. Based on a £100 loan over one year at the same rate of interest as this account
+If paid in full after three months an interest rate of £18.81 will be due.
+If paid in full after six months an interest rate of £8.19 will be due.
+If paid in full after nine months an interest rate of £1.62 will be due.
+These figures are for illustration only as they take no account of any variation that may be made to this agreement.
+
+MISSING PAYMENTS
+Missing payments could have severe consequences and make obtaining credit more difficult.
+
+IMPORTANT-READ THIS CAREFULLY TO FIND OUT ABOUT YOUR RIGHTS
+The Consumer Act 1974 lays down certain requirements for your protection, which should have been complied with when this agreement was made. If they are not, the creditor cannot enforce this agreement without getting a court order.
+The Act also gives you a number of rights. You can settle this agreement at anytime by giving notice in writing and paying off the amount you owe under the agreement which may be reduced by a rebate. Examples indicating the amount you have to pay appear in this agreement.
+
+If you would like to know more about your rights under the Act, contact either your local Trading Standards Department or your nearest Citizens Advice Bureau.
+
+YOUR RIGHT TO CANCEL
+Once you've signed this agreement, you will have a short time in which you can cancel it. The Creditor will send you exact details of how and when you can do this.</value>
+  </data>
+</root>

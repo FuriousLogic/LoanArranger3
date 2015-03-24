@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FABCFB64-E90A-466D-9E0F-420EE3974D8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LA3</RootNamespace>
+    <AssemblyName>LA3</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>FD876728590F50C3C1B758405FC45E864916AD87</ManifestCertificateThumbprint>
+    <ManifestKeyFile>LA3_1_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <PublishUrl>C:\Users\Barry\Documents\My Dropbox\ClickOnceDeployment\LoanArranger\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://www.dropbox.com/sh/zik2gfavyugyvm7/AABSNFnO9HhYyGXT4Lb3NwjCa%3fdl=0/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>0.1.0.2</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Assemblies\itextsharp-all-5.3.5\itextsharp-dll-core\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>..\..\..\..\Assemblies\itextsharp-all-5.3.5\itextsharp-dll-pdfa\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ServiceModel.DomainServices.EntityFramework\v4.0_4.0.0.0__31bf3856ad364e35\System.ServiceModel.DomainServices.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\windows\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebChart, Version=1.1.1.4, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\WebChart.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agreement.cs" />
+    <Compile Include="cntAccount.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntAccount.Designer.cs">
+      <DependentUpon>cntAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntCollector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntCollector.Designer.cs">
+      <DependentUpon>cntCollector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntCustomer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntCustomer.Designer.cs">
+      <DependentUpon>cntCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntLastMonthsPayments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntLastMonthsPayments.Designer.cs">
+      <DependentUpon>cntLastMonthsPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntPayments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntPayments.Designer.cs">
+      <DependentUpon>cntPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntPrintAgreement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntPrintAgreement.Designer.cs">
+      <DependentUpon>cntPrintAgreement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntReportByDebt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntReportByDebt.Designer.cs">
+      <DependentUpon>cntReportByDebt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntReportNotPaid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntReportNotPaid.Designer.cs">
+      <DependentUpon>cntReportNotPaid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntReportSundries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntReportSundries.Designer.cs">
+      <DependentUpon>cntReportSundries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntSundry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntSundry.Designer.cs">
+      <DependentUpon>cntSundry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance.cs" />
+    <Compile Include="frmCustomerSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerSearch.Designer.cs">
+      <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayments.Designer.cs">
+      <DependentUpon>frmPayments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPayOffAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayOffAccounts.Designer.cs">
+      <DependentUpon>frmPayOffAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmShowAgreement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShowAgreement.Designer.cs">
+      <DependentUpon>frmShowAgreement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVersion.Designer.cs">
+      <DependentUpon>frmVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functions.cs" />
+    <Compile Include="ModelExtenders\Account.cs" />
+    <Compile Include="ModelExtenders\AccountStatus.cs" />
+    <Compile Include="ModelExtenders\Collector.cs" />
+    <Compile Include="ModelExtenders\Customer.cs" />
+    <Compile Include="ModelExtenders\Payment.cs" />
+    <Compile Include="Model\Account.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountStatus.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountStatusChange.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Collector.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Customer.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LA_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LA_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LA_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LA_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LA_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Payment.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Report_NotPaid_Result.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentInfo.cs" />
+    <Compile Include="PdfPage.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportHelper.cs" />
+    <Compile Include="Reports\Reports.cs" />
+    <EmbeddedResource Include="cntAccount.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>cntAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntCollector.resx">
+      <DependentUpon>cntCollector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntCustomer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>cntCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntLastMonthsPayments.resx">
+      <DependentUpon>cntLastMonthsPayments.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntPayments.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>cntPayments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntPrintAgreement.resx">
+      <DependentUpon>cntPrintAgreement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntReportByDebt.resx">
+      <DependentUpon>cntReportByDebt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntReportNotPaid.resx">
+      <DependentUpon>cntReportNotPaid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntReportSundries.resx">
+      <DependentUpon>cntReportSundries.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntSundry.resx">
+      <DependentUpon>cntSundry.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerSearch.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayments.resx">
+      <DependentUpon>frmPayments.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayOffAccounts.resx">
+      <DependentUpon>frmPayOffAccounts.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShowAgreement.resx">
+      <DependentUpon>frmShowAgreement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVersion.resx">
+      <DependentUpon>frmVersion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Agreement.rpt" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LA3_1_TemporaryKey.pfx" />
+    <None Include="LA3_TemporaryKey.pfx" />
+    <EntityDeploy Include="Model\LA_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LA_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\LA_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LA_Model.edmx</DependentUpon>
+      <LastGenOutput>LA_Model.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\LA_Model.edmx.diagram">
+      <DependentUpon>LA_Model.edmx</DependentUpon>
+    </None>
+    <None Include="Model\LA_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LA_Model.edmx</DependentUpon>
+      <LastGenOutput>LA_Model.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.9.2">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition SP2 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ajax-loader.gif" />
+    <Content Include="Model\LA_ReferenceData.sql" />
+    <Content Include="Model\LA_Model.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

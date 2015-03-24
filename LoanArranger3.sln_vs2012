@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LA3", "LA3\LA3.csproj", "{FABCFB64-E90A-466D-9E0F-420EE3974D8B}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FABCFB64-E90A-466D-9E0F-420EE3974D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FABCFB64-E90A-466D-9E0F-420EE3974D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FABCFB64-E90A-466D-9E0F-420EE3974D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FABCFB64-E90A-466D-9E0F-420EE3974D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+	GlobalSection(VaultVsipSolution-v1) = preSolution
+		VaultHost = http://barry-laptop/VaultService
+		VaultRepositoryID = 2
+		VaultRepositoryGUID = 1fca6aa9-ce71-413b-844c-c48722427975
+		ProjectCount = 6
+		ProjectRelativeDiskPath1 = LA3\LA3.csproj
+		ProjectRelativeDiskPath2 = LA3_Data\LA3_Data.csproj
+		ProjectRelativeDiskPath3 = LA3DataTransfer\LA3DataTransfer.csproj
+		ProjectRelativeDiskPath4 = LA3_Model\LA3_Model.csproj
+		ProjectRelativeDiskPath5 = LoanArranger3\LoanArranger3.vdproj
+		ProjectRelativeDiskPath6 = SetupScripts\SetupScripts.csproj
+	EndGlobalSection
+EndGlobal
