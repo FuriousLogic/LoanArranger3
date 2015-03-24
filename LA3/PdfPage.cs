@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Font = iTextSharp.text.Font;
 
 namespace LA3
 {

@@ -14,7 +14,6 @@ public delegate void DelShowCustomer(int customerID);
 public delegate void DelShowStatusText(string message);
 public delegate void DelShowSundry(Account account);
 public delegate void DelBackToMain();
-public delegate string AsyncMethodCaller(DateTime selectedMonth);
 
 namespace LA3
 {
