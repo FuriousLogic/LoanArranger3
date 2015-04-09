@@ -187,6 +187,12 @@
     <Compile Include="frmCustomerSearch.Designer.cs">
       <DependentUpon>frmCustomerSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmImportEncryptedDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportEncryptedDB.Designer.cs">
+      <DependentUpon>frmImportEncryptedDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +314,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmCustomerSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmImportEncryptedDB.resx">
+      <DependentUpon>frmImportEncryptedDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -338,7 +347,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Agreement.rpt" />
+    <None Include="Properties\Agreement.rpt" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -436,6 +445,12 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Encryption\Encryption.csproj">
+      <Project>{7BDEFAFA-EFEF-4421-BD0C-8181DC3B9601}</Project>
+      <Name>Encryption</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

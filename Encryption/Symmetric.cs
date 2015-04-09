@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace LA3_FileEncryption
+namespace Encryption
 {
     public static class Symmetric
     {
@@ -131,7 +131,7 @@ namespace LA3_FileEncryption
 
             var decryptedBytes = DecryptToBytes(secret, cipherTextBytes);
 
-            var newFilename = Path.GetRandomFileName() + ".mp4";
+            var newFilename = Path.GetRandomFileName();
             var fullPath = Path.Combine(targetDirectory, newFilename);
 
             binaryReader.Close();
@@ -141,7 +141,7 @@ namespace LA3_FileEncryption
 
             File.WriteAllBytes(fullPath, decryptedBytes);
 
-            return newFilename;
+            return fullPath;
         }
 
         static byte[] GetBytes(string str)
