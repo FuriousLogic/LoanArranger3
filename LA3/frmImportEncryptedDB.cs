@@ -85,11 +85,11 @@ namespace LA3
                     var executeNonQuery = sqlCommand.ExecuteNonQuery();
                     sqlConnection.Close();
                 }
-                //Create blank DB
-                var sqlCreateDatabase = string.Format("create database [{0}]", databaseName);
-                var command = new SqlCommand(sqlCreateDatabase, sqlConnection);
-                sqlConnection.Open();
-                command.ExecuteNonQuery();
+                ////Create blank DB
+                //var sqlCreateDatabase = string.Format("create database [{0}]", databaseName);
+                //var command = new SqlCommand(sqlCreateDatabase, sqlConnection);
+                //sqlConnection.Open();
+                //command.ExecuteNonQuery();
 
                 //Decrypt
                 var encryptedFilepath = txtEncryptedDatabaseFile.Text.Trim();
@@ -98,6 +98,8 @@ namespace LA3
 
                 //Run script to rebuild db
                 //var script = File.ReadAllText(scriptFileName);
+                SqlCommand command;
+                sqlConnection.Open();
                 var scriptBatch = new StringBuilder();
                 using (var reader = new StreamReader(decryptFilePath))
                 {
@@ -131,6 +133,7 @@ namespace LA3
                 sqlConnection.Close();
 
                 MessageBox.Show(@"New Database Loaded");
+                Close();
             }
             catch (Exception ex)
             {
