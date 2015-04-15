@@ -42,7 +42,7 @@ namespace LA3_FileEncryption
             if (txtKey.Text.Trim().Length == 0) return;
 
             var key = txtKey.Text.Trim();
-            const string targetDirectory = @"C:\Users\Barry\Documents\My Dropbox\ClickOnceDeployment\LoanArrangerEncryptedData";
+            const string targetDirectory = @"C:\Users\Barry\Documents\My Dropbox\Deployment\LA3_Data";
             var encryptedFilename = string.Format("LA3_Data_{0}.enc", DateTime.Now.ToString("yyyyMMddHHmmss"));
             var encryptFile = Symmetric.EncryptFile(plainTextFilePath, key, targetDirectory, encryptedFilename);
 
