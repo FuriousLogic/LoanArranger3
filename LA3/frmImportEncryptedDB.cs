@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Encryption;
+//using Encryption;
 using LA3.Model;
 
 namespace LA3
@@ -91,10 +91,10 @@ namespace LA3
                 //sqlConnection.Open();
                 //command.ExecuteNonQuery();
 
-                //Decrypt
-                var encryptedFilepath = txtEncryptedDatabaseFile.Text.Trim();
-                var key = txtKey.Text.Trim();
-                var decryptFilePath = Symmetric.DecryptFile(encryptedFilepath, key, Path.GetTempPath());
+                ////Decrypt
+                //var encryptedFilepath = txtEncryptedDatabaseFile.Text.Trim();
+                //var key = txtKey.Text.Trim();
+                //var decryptFilePath = Symmetric.DecryptFile(encryptedFilepath, key, Path.GetTempPath());
 
                 //Run script to rebuild db
                 //var script = File.ReadAllText(scriptFileName);
