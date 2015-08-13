@@ -13,7 +13,7 @@ namespace LA3
         public event DelShowStatusText EvShowStatusText;
         public event DelShowSundry EvShowSundry;
         public event DelShowCustomer EvShowCustomer;
-        public event DelBackToMain EvBackToMain;
+        public event DelBackToMain EvBackToMain; 
         private LA_Entities _db = new LA_Entities();
 
         #region Constructors
