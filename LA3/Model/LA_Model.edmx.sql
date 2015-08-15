@@ -1,9 +1,9 @@
 
 -- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/25/2013 16:52:50
--- Generated from EDMX file: C:\Users\Barry\Documents\Visual Studio 2012\LoanArranger3\LA3\Model\LA_Model.edmx
+-- Date Created: 08/15/2015 17:21:04
+-- Generated from EDMX file: C:\Development\dotNet\LoanArranger3\LA3\Model\LA_Model.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,44 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_AccountAccountStatusChange]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccountStatusChanges] DROP CONSTRAINT [FK_AccountAccountStatusChange];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccountPayment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Payments] DROP CONSTRAINT [FK_AccountPayment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccountStatusAccountStatusChange]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccountStatusChanges] DROP CONSTRAINT [FK_AccountStatusAccountStatusChange];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CollectorCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CollectorCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_CustomerAccount];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Accounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Accounts];
+GO
+IF OBJECT_ID(N'[dbo].[AccountStatus]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccountStatus];
+GO
+IF OBJECT_ID(N'[dbo].[AccountStatusChanges]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccountStatusChanges];
+GO
+IF OBJECT_ID(N'[dbo].[Collectors]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Collectors];
+GO
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
+GO
+IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Payments];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -87,7 +120,8 @@ CREATE TABLE [dbo].[Customers] (
     [Locked] bit  NOT NULL,
     [IsDeleted] bit  NOT NULL,
     [LockedByUser] nvarchar(max)  NOT NULL,
-    [Collector_Id] int  NOT NULL
+    [Collector_Id] int  NOT NULL,
+    [OldId] int  NOT NULL
 );
 GO
 
@@ -147,48 +181,6 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Collector_Id] in table 'Customers'
-ALTER TABLE [dbo].[Customers]
-ADD CONSTRAINT [FK_CollectorCustomer]
-    FOREIGN KEY ([Collector_Id])
-    REFERENCES [dbo].[Collectors]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CollectorCustomer'
-CREATE INDEX [IX_FK_CollectorCustomer]
-ON [dbo].[Customers]
-    ([Collector_Id]);
-GO
-
--- Creating foreign key on [Customer_Id] in table 'Accounts'
-ALTER TABLE [dbo].[Accounts]
-ADD CONSTRAINT [FK_CustomerAccount]
-    FOREIGN KEY ([Customer_Id])
-    REFERENCES [dbo].[Customers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CustomerAccount'
-CREATE INDEX [IX_FK_CustomerAccount]
-ON [dbo].[Accounts]
-    ([Customer_Id]);
-GO
-
--- Creating foreign key on [AccountStatus_Id] in table 'AccountStatusChanges'
-ALTER TABLE [dbo].[AccountStatusChanges]
-ADD CONSTRAINT [FK_AccountStatusAccountStatusChange]
-    FOREIGN KEY ([AccountStatus_Id])
-    REFERENCES [dbo].[AccountStatus]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AccountStatusAccountStatusChange'
-CREATE INDEX [IX_FK_AccountStatusAccountStatusChange]
-ON [dbo].[AccountStatusChanges]
-    ([AccountStatus_Id]);
-GO
-
 -- Creating foreign key on [Account_Id] in table 'AccountStatusChanges'
 ALTER TABLE [dbo].[AccountStatusChanges]
 ADD CONSTRAINT [FK_AccountAccountStatusChange]
@@ -196,6 +188,7 @@ ADD CONSTRAINT [FK_AccountAccountStatusChange]
     REFERENCES [dbo].[Accounts]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AccountAccountStatusChange'
 CREATE INDEX [IX_FK_AccountAccountStatusChange]
@@ -210,11 +203,57 @@ ADD CONSTRAINT [FK_AccountPayment]
     REFERENCES [dbo].[Accounts]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AccountPayment'
 CREATE INDEX [IX_FK_AccountPayment]
 ON [dbo].[Payments]
     ([Account_Id]);
+GO
+
+-- Creating foreign key on [Customer_Id] in table 'Accounts'
+ALTER TABLE [dbo].[Accounts]
+ADD CONSTRAINT [FK_CustomerAccount]
+    FOREIGN KEY ([Customer_Id])
+    REFERENCES [dbo].[Customers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerAccount'
+CREATE INDEX [IX_FK_CustomerAccount]
+ON [dbo].[Accounts]
+    ([Customer_Id]);
+GO
+
+-- Creating foreign key on [AccountStatus_Id] in table 'AccountStatusChanges'
+ALTER TABLE [dbo].[AccountStatusChanges]
+ADD CONSTRAINT [FK_AccountStatusAccountStatusChange]
+    FOREIGN KEY ([AccountStatus_Id])
+    REFERENCES [dbo].[AccountStatus]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountStatusAccountStatusChange'
+CREATE INDEX [IX_FK_AccountStatusAccountStatusChange]
+ON [dbo].[AccountStatusChanges]
+    ([AccountStatus_Id]);
+GO
+
+-- Creating foreign key on [Collector_Id] in table 'Customers'
+ALTER TABLE [dbo].[Customers]
+ADD CONSTRAINT [FK_CollectorCustomer]
+    FOREIGN KEY ([Collector_Id])
+    REFERENCES [dbo].[Collectors]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CollectorCustomer'
+CREATE INDEX [IX_FK_CollectorCustomer]
+ON [dbo].[Customers]
+    ([Collector_Id]);
 GO
 
 -- --------------------------------------------------

@@ -28,7 +28,7 @@
     <ManifestCertificateThumbprint>FD876728590F50C3C1B758405FC45E864916AD87</ManifestCertificateThumbprint>
     <ManifestKeyFile>LA3_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -81,10 +81,10 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>..\..\..\..\Users\Barry\Documents\Assemblies\itextsharp-all-5.3.5\itextsharp-dll-core\itextsharp.dll</HintPath>
+      <HintPath>..\..\..\ThirdParty\itextsharp-all-5.5.6\itextsharp-dll-core\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp.pdfa">
-      <HintPath>..\..\..\..\Users\Barry\Documents\Assemblies\itextsharp-all-5.3.5\itextsharp-dll-pdfa\itextsharp.pdfa.dll</HintPath>
+      <HintPath>..\..\..\ThirdParty\itextsharp-all-5.5.6\itextsharp-dll-pdfa\itextsharp.pdfa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
