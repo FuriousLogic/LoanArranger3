@@ -62,15 +62,6 @@ namespace LA3.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetCustomerCountByCollector", collectorIdParameter);
         }
     
-        public virtual ObjectResult<Report_NotPaid_Result> Report_NotPaid(Nullable<int> weeks)
-        {
-            var weeksParameter = weeks.HasValue ?
-                new ObjectParameter("weeks", weeks) :
-                new ObjectParameter("weeks", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Report_NotPaid_Result>("Report_NotPaid", weeksParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> Report_ByDebt(Nullable<int> debt)
         {
             var debtParameter = debt.HasValue ?
@@ -78,6 +69,15 @@ namespace LA3.Model
                 new ObjectParameter("debt", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Report_ByDebt", debtParameter);
+        }
+    
+        public virtual ObjectResult<Report_NotPaid_Result1> Report_NotPaid(Nullable<int> weeks)
+        {
+            var weeksParameter = weeks.HasValue ?
+                new ObjectParameter("weeks", weeks) :
+                new ObjectParameter("weeks", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Report_NotPaid_Result1>("Report_NotPaid", weeksParameter);
         }
     }
 }

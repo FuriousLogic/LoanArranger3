@@ -265,6 +265,9 @@
     <Compile Include="Model\Report_NotPaid_Result.cs">
       <DependentUpon>LA_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Report_NotPaid_Result1.cs">
+      <DependentUpon>LA_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="PaymentInfo.cs" />
     <Compile Include="PdfPage.cs" />
     <Compile Include="Program.cs" />

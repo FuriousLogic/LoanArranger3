@@ -236,9 +236,9 @@ namespace LA3.Reports
                 ReportHelper.AddCell(tbl, "Next Payment Due", 1, Element.ALIGN_CENTER, fontColumnHeader, Rectangle.BOTTOM_BORDER, 10);
 
                 //Data
-                List<Report_NotPaid_Result> results = _db.Report_NotPaid(weeks).ToList();
+                var results = _db.Report_NotPaid(weeks).ToList();
                 //List<Account> badAccounts = (from a in db.Accounts where a.NextPaymentDate < cutoff orderby a.NextPaymentDate ascending select a).ToList();
-                foreach (Report_NotPaid_Result result in results)
+                foreach (var result in results)
                 {
                     if (result == null) continue;
                     if (result.LastPayment == null) continue;
