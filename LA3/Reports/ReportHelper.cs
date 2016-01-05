@@ -28,15 +28,15 @@ namespace LA3.Reports
         {
             document.Add(new Paragraph(new Chunk(line, fontHeader)));
         }
+
         public static string CreateDoc(ref Document document)
-        {
-            return CreateDoc(ref document, true);
-        }
-        public static string CreateDoc(ref Document document, bool headersAndFooters)
         {
             //Delete old report files
             var di = new DirectoryInfo(Path.GetTempPath());
-            foreach (FileInfo fi in di.GetFiles())
+            if(di==null)
+                throw new Exception("Error getting Temp Path!");
+
+            foreach (var fi in di.GetFiles())
             {
                 if (!fi.Name.StartsWith("LA3_")) continue;
                 if (fi.Name.EndsWith(".pdf"))
@@ -47,8 +47,8 @@ namespace LA3.Reports
             }
 
             //Setup folder & filename
-            string filename = "LA3_" + Guid.NewGuid().ToString() + ".pdf";
-            string pdfPath = Path.GetTempPath();
+            var filename = "LA3_" + Guid.NewGuid() + ".pdf";
+            var pdfPath = Path.GetTempPath();
             pdfPath = Path.Combine(pdfPath, filename);
 
             //Creates a Writer that listens to this document and writes the document to the Stream of your choice:
@@ -61,7 +61,7 @@ namespace LA3.Reports
         }
         public static string ShowCurrency(double d)
         {
-            return String.Format("{0:c}", d);
+            return string.Format("{0:c}", d);
         }
     }
 }

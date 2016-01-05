@@ -1,21 +1,16 @@
 using System;
 using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Windows.Forms;
 
-//using Microsoft.SqlServer.Management.Smo;
-//using Microsoft.SqlServer.Management.Common;
-
 using LA3.Model;
+using LA3.Properties;
 
-public delegate void DelNewAccount(int customerID);
-public delegate void DelLoadAccount(int accountID);
-public delegate void DelShowCustomer(int customerID);
+public delegate void DelNewAccount(int customerId);
+public delegate void DelLoadAccount(int accountId);
+public delegate void DelShowCustomer(int customerId);
 public delegate void DelShowStatusText(string message);
 public delegate void DelShowSundry(Account account);
 public delegate void DelBackToMain();
@@ -35,17 +30,16 @@ namespace LA3
         private CntLastMonthsPayments _cLastMonthsPayments;
         private CntReportSundries _cReportSundries;
 
-        private readonly string _appPath = "";
-
         public FrmMain()
         {
             //bug: form never dislayed
             InitializeComponent();
 
-            _appPath = Application.ExecutablePath;
-            var n = _appPath.LastIndexOf(@"\", StringComparison.Ordinal);
-            _appPath = _appPath.Substring(0, n + 1);
+            //var appPath = Application.ExecutablePath;
+            //var n = appPath.LastIndexOf(@"\", StringComparison.Ordinal);
+            //appPath = appPath.Substring(0, n + 1);
 
+            //todo: Lose this?
             //DB Import?
             if (!Properties.Settings.Default.ImportDB) return;
 
@@ -60,164 +54,304 @@ namespace LA3
 
         private void collectorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _cCollector.ClearFields();
-            ShowControl(_cCollector, "Collectors");
+            try
+            {
+                _cCollector.ClearFields();
+                ShowControl(_cCollector, "Collectors");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void ShowControl(Control userControl, string caption)
         {
-            lblCaption.Text = caption;
-            pnlControl.Controls.Clear();
-            pnlControl.Controls.Add(userControl);
-            userControl.Anchor = AnchorStyles.Right;
-            userControl.Dock = DockStyle.Fill;
-            ssMainLabel.Text = "";
+            try
+            {
+                lblCaption.Text = caption;
+                pnlControl.Controls.Clear();
+                pnlControl.Controls.Add(userControl);
+                userControl.Anchor = AnchorStyles.Right;
+                userControl.Dock = DockStyle.Fill;
+                ssMainLabel.Text = "";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowControl(_cCustomer, "Customers");
-            _cCustomer.ShowCustomer();
+            try
+            {
+                ShowControl(_cCustomer, "Customers");
+                _cCustomer.ShowCustomer();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         void cust_evLoadAccount(int accountID)
         {
-            ShowControl(_cAccount, "Accounts");
-            _cAccount.LoadAccount(accountID);
+            try
+            {
+                ShowControl(_cAccount, "Accounts");
+                _cAccount.LoadAccount(accountID);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         void cust_evNewAccount(int customerID)
         {
-            ShowControl(_cAccount, "Accounts");
-            _cAccount.CreateNewAccount(customerID);
+            try
+            {
+                ShowControl(_cAccount, "Accounts");
+                _cAccount.CreateNewAccount(customerID);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         void acc_evShowCustomer(int customerID)
         {
-            ShowControl(_cCustomer, "Customers");
-            _cCustomer.ShowCustomer(customerID);
+            try
+            {
+                ShowControl(_cCustomer, "Customers");
+                _cCustomer.ShowCustomer(customerID);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private void accountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _cAccount.ClearAccount();
-            ShowControl(_cAccount, "Accounts");
+            try
+            {
+                _cAccount.ClearAccount();
+                ShowControl(_cAccount, "Accounts");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            InitialiseControls();
-
-            //Show Version from AssemblyInfo.cs
-            Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            Text = "Loan Arranger III:";
-            lnkVersion.Text = "v." + ver.Major.ToString(CultureInfo.InvariantCulture) + "." + ver.Minor.ToString(CultureInfo.InvariantCulture) + "." + ver.Build.ToString(CultureInfo.InvariantCulture) + "." + ver.Revision.ToString(CultureInfo.InvariantCulture);
-
-            //Check for User
-            if (String.IsNullOrEmpty(Properties.Settings.Default.User))
+            try
             {
-                MessageBox.Show("Setup the 'User' item in AppSettings within app.config", "Configuration Problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }
-            else
-            {
-                Text += " (" + Properties.Settings.Default.User + ")";
-            }
+                InitialiseControls();
 
-            //Show Satelite menu
-            sateliteToolStripMenuItem.Enabled = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowSateliteMenu"]);
+                //Show Version from AssemblyInfo.cs
+                Version ver = Assembly.GetExecutingAssembly().GetName().Version;
+                Text = "Loan Arranger III:";
+                lnkVersion.Text = "v." + ver.Major.ToString(CultureInfo.InvariantCulture) + "." + ver.Minor.ToString(CultureInfo.InvariantCulture) + "." + ver.Build.ToString(CultureInfo.InvariantCulture) + "." + ver.Revision.ToString(CultureInfo.InvariantCulture);
+
+                //Check for User
+                if (String.IsNullOrEmpty(Settings.Default.User))
+                {
+                    MessageBox.Show("Setup the 'User' item in AppSettings within app.config", "Configuration Problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                }
+                else
+                {
+                    Text += " (" + Settings.Default.User + ")";
+                }
+
+                //Show Satelite menu
+                sateliteToolStripMenuItem.Enabled = Convert.ToBoolean(ConfigurationManager.AppSettings["ShowSateliteMenu"]);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void InitialiseControls()
         {
-            _cAccount = new CntAccount();
-            _cAccount.EvShowCustomer += acc_evShowCustomer;
-            _cAccount.EvShowStatusText += EvShowStatusText;
-            _cAccount.EvShowSundry += acc_evShowSundry;
-            _cAccount.EvBackToMain += BackToMain;
+            try
+            {
+                _cAccount = new CntAccount();
+                _cAccount.EvShowCustomer += acc_evShowCustomer;
+                _cAccount.EvShowStatusText += EvShowStatusText;
+                _cAccount.EvShowSundry += acc_evShowSundry;
+                _cAccount.EvBackToMain += BackToMain;
 
-            _cCustomer = new CntCustomer();
-            _cCustomer.EvNewAccount += cust_evNewAccount;
-            _cCustomer.EvLoadAccount += cust_evLoadAccount;
-            _cCustomer.EvShowStatusText += EvShowStatusText;
-            _cCustomer.EvBackToMain += BackToMain;
+                _cCustomer = new CntCustomer();
+                _cCustomer.EvNewAccount += cust_evNewAccount;
+                _cCustomer.EvLoadAccount += cust_evLoadAccount;
+                _cCustomer.EvShowStatusText += EvShowStatusText;
+                _cCustomer.EvBackToMain += BackToMain;
 
-            _cCollector = new CntCollector();
-            _cCollector.EvShowStatusText += EvShowStatusText;
+                _cCollector = new CntCollector();
+                _cCollector.EvShowStatusText += EvShowStatusText;
 
-            _cPayment = new CntPayments();
-            _cSundry = new CntSundry();
-            _cReportNotPaid = new CntReportNotPaid();
-            _cReportByDebt = new CntReportByDebt();
-            _cPrintAgreement = new CntPrintAgreement();
-            _cLastMonthsPayments = new CntLastMonthsPayments();
-            _cReportSundries = new CntReportSundries();
+                _cPayment = new CntPayments();
+                _cSundry = new CntSundry();
+                _cReportNotPaid = new CntReportNotPaid();
+                _cReportByDebt = new CntReportByDebt();
+                _cPrintAgreement = new CntPrintAgreement();
+                _cLastMonthsPayments = new CntLastMonthsPayments();
+                _cReportSundries = new CntReportSundries();
 
-            //cPrintAgreement.Anchor = AnchorStyles.Bottom & AnchorStyles.Top;
+                //cPrintAgreement.Anchor = AnchorStyles.Bottom & AnchorStyles.Top;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         void BackToMain()
         {
-            lblCaption.Text = "";
-            pnlControl.Controls.Clear();
-            ssMainLabel.Text = "";
+            try
+            {
+                lblCaption.Text = "";
+                pnlControl.Controls.Clear();
+                ssMainLabel.Text = "";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         void acc_evShowSundry(Account account)
         {
-            ShowControl(_cSundry, "Sundry");
-            _cSundry.Account = account;
+            try
+            {
+                ShowControl(_cSundry, "Sundry");
+                _cSundry.Account = account;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private void EvShowStatusText(string msg)
         {
-            ssMainLabel.Text = msg;
+            try
+            {
+                ssMainLabel.Text = msg;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _cPayment.Clear();
-            ShowControl(_cPayment, "Payments");
+            try
+            {
+                _cPayment.Clear();
+                ShowControl(_cPayment, "Payments");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void sundriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _cSundry.Clear();
-            ShowControl(_cSundry, "Sundries");
+            try
+            {
+                _cSundry.Clear();
+                ShowControl(_cSundry, "Sundries");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void owingByCollectorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var reports = new Reports.Reports();
-            string file = reports.OwingByCollector();
+            try
+            {
+                var reports = new Reports.Reports();
+                var file = reports.OwingByCollector();
 
-            System.Diagnostics.Process.Start(file);
+                Process.Start(file);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void notPaidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowControl(_cReportNotPaid, "Report - Not Paid");
+            try
+            {
+                ShowControl(_cReportNotPaid, "Report - Not Paid");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void byDebtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowControl(_cReportByDebt, "Report - By Debt");
+            try
+            {
+                ShowControl(_cReportByDebt, "Report - By Debt");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void printAgreementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowControl(_cPrintAgreement, "Print Agreements");
+            try
+            {
+                ShowControl(_cPrintAgreement, "Print Agreements");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void lastMonthsPaymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowControl(_cLastMonthsPayments, "Last Month's Payments");
+            try
+            {
+                ShowControl(_cLastMonthsPayments, "Last Month's Payments");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void lnkVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var f = new FrmVersion();
-            f.ShowDialog();
+            try
+            {
+                var f = new FrmVersion();
+                f.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void backupDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,7 +402,14 @@ namespace LA3
 
         private void sundriesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ShowControl(_cReportSundries, "Sundries Report");
+            try
+            {
+                ShowControl(_cReportSundries, "Sundries Report");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }

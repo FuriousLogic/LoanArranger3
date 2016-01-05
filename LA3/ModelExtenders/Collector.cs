@@ -10,11 +10,11 @@ namespace LA3.Model
         {
             get
             {
-                var db = new LA_Entities();
-                var result = db.CustomersWithAccountsCount(Id).FirstOrDefault();
-                if (result == null)
-                    throw new Exception("CustomersWithAccountsCount: Can't find result");
-                return (int)result;
+                var rv = 0;
+                foreach (var customer in Customers)
+                    rv += customer.Accounts.Count(account => account.CurrentStatus.IsCreated);
+
+                return rv;
             }
         }
         public int LiveCustomersCount
