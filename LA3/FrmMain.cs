@@ -61,7 +61,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -78,7 +78,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -91,7 +91,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -104,7 +104,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -117,7 +117,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -130,7 +130,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -143,7 +143,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -174,7 +174,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -209,7 +209,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -223,7 +223,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -236,7 +236,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -248,7 +248,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ShowError(e);
             }
         }
 
@@ -261,7 +261,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -274,7 +274,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -289,7 +289,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError(exception);
             }
         }
 
@@ -301,7 +301,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -313,7 +313,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -325,7 +325,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -337,7 +337,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -350,7 +350,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
 
@@ -408,8 +408,14 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                ShowError(exception);
             }
         }
+
+        private static void ShowError(Exception exception)
+        {
+            MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 }
