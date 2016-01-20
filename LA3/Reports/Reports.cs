@@ -150,7 +150,7 @@ namespace LA3.Reports
 
             //Get Data
             var db = new LA_Entities();
-            var customerIds = db.Report_ByDebt(debt);
+            var customerIds = Functions.GetCustomerIdsByDebt(debt);
             foreach (var customerId in customerIds)
             {
                 if (customerId == null) continue;

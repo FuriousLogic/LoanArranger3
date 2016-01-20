@@ -35,15 +35,6 @@ namespace LA3.Model
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Payment> Payments { get; set; }
     
-        public virtual ObjectResult<Nullable<int>> Report_ByDebt(Nullable<int> debt)
-        {
-            var debtParameter = debt.HasValue ?
-                new ObjectParameter("debt", debt) :
-                new ObjectParameter("debt", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Report_ByDebt", debtParameter);
-        }
-    
         public virtual ObjectResult<Report_NotPaid_Result1> Report_NotPaid(Nullable<int> weeks)
         {
             var weeksParameter = weeks.HasValue ?

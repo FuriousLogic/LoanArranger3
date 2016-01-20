@@ -142,9 +142,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="Report_ByDebt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="debt" Type="int" Mode="In" />
-        </Function>
         <Function Name="Report_NotPaid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="weeks" Type="int" Mode="In" />
         </Function>
@@ -207,9 +204,6 @@
             <End Role="Collectors" EntitySet="Collectors" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <FunctionImport Name="Report_ByDebt" ReturnType="Collection(Int32)">
-            <Parameter Name="debt" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="Report_NotPaid" ReturnType="Collection(LA_Model.Report_NotPaid_Result1)">
             <Parameter Name="weeks" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -460,7 +454,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Report_ByDebt" FunctionName="LA_Model.Store.Report_ByDebt" />
           <FunctionImportMapping FunctionImportName="Report_NotPaid" FunctionName="LA_Model.Store.Report_NotPaid">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LA_Model.Report_NotPaid_Result1">
