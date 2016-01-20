@@ -35,15 +35,6 @@ namespace LA3.Model
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Payment> Payments { get; set; }
     
-        public virtual ObjectResult<Nullable<double>> GetAmountOwingForCollector(Nullable<int> collectorID)
-        {
-            var collectorIDParameter = collectorID.HasValue ?
-                new ObjectParameter("CollectorID", collectorID) :
-                new ObjectParameter("CollectorID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetAmountOwingForCollector", collectorIDParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> GetCustomerCountByCollector(Nullable<int> collectorId)
         {
             var collectorIdParameter = collectorId.HasValue ?

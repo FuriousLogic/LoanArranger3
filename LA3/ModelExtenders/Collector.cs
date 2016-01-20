@@ -32,13 +32,6 @@ namespace LA3.Model
                 }
 
                 return rv;
-                //var db = new LA_Entities();
-                //var result = db.GetAmountOwingForCollector(Id).FirstOrDefault();
-                //if (result == null)
-                //    throw new Exception("TotalAmountOwed: Can't find result");
-
-                //if (result.Owing == null) return 0;
-                //return (double)result.Owing;
             }
         }
 
