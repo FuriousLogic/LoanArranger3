@@ -400,7 +400,7 @@ namespace LA3.Reports
             foreach (var c in _db.Collectors.ToList())
             {
                 var owing = c.TotalAmountOwed;
-                var customers = c.CustomersWithAccountsCount;
+                var customers = c.CustomersWithLiveAccountsCount;
 
                 var phrase = new Phrase { Leading = leading };
                 var chunk = new Chunk(c.CollectorName, fontNormal);

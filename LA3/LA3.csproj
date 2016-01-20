@@ -429,7 +429,6 @@
     <Content Include="ajax-loader.gif" />
     <Content Include="Model\LA_ReferenceData.sql" />
     <Content Include="Model\LA_Model.edmx.sql" />
-    <Content Include="Model\SPs.sql" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AcroPDFLib">

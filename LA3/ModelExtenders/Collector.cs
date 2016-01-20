@@ -6,7 +6,7 @@ namespace LA3.Model
 {
     public partial class Collector
     {
-        public int CustomersWithAccountsCount
+        public int CustomersWithLiveAccountsCount
         {
             get
             {
@@ -15,17 +15,6 @@ namespace LA3.Model
                     rv += customer.Accounts.Count(account => account.CurrentStatus.IsCreated);
 
                 return rv;
-            }
-        }
-        public int LiveCustomersCount
-        {
-            get
-            {
-                var db = new LA_Entities();
-                var result = db.GetCustomerCountByCollector(Id).FirstOrDefault();
-                if (result == null)
-                    throw new Exception("LiveCustomersCount: Can't find result");
-                return (int)result;
             }
         }
         public double TotalAmountOwed

@@ -142,9 +142,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="CustomersWithAccountsCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CollectorId" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetAmountOwingForCollector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CollectorID" Type="int" Mode="In" />
         </Function>
@@ -216,9 +213,6 @@
             <End Role="Collectors" EntitySet="Collectors" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <FunctionImport Name="CustomersWithAccountsCount" ReturnType="Collection(Int32)">
-            <Parameter Name="CollectorId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetAmountOwingForCollector" ReturnType="Collection(Double)">
             <Parameter Name="CollectorID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -478,7 +472,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CustomersWithAccountsCount" FunctionName="LA_Model.Store.CustomersWithAccountsCount" />
           <FunctionImportMapping FunctionImportName="GetAmountOwingForCollector" FunctionName="LA_Model.Store.GetAmountOwingForCollector" />
           <FunctionImportMapping FunctionImportName="GetCustomerCountByCollector" FunctionName="LA_Model.Store.GetCustomerCountByCollector" />
           <FunctionImportMapping FunctionImportName="Report_ByDebt" FunctionName="LA_Model.Store.Report_ByDebt" />

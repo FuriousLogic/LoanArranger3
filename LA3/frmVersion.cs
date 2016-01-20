@@ -14,6 +14,8 @@ namespace LA3
         {
             const string indent = "   ";
             var s = "";
+            s += "0.3.2.0" + Environment.NewLine;
+            s += indent + "Enh: Better error handling for reports." + Environment.NewLine;
             s += "0.3.1.0" + Environment.NewLine;
             s += indent + "Fix: Payoff amount not being saved." + Environment.NewLine;
             s += "0.3.0.0" + Environment.NewLine;
