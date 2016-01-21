@@ -6,6 +6,18 @@ namespace LA3.Model
 {
     partial class Account
     {
+        public Payment LastPayment
+        {
+            get
+            {
+                if (Payments.Count == 0) return null;
+
+                var lastPayment =
+                    (from p in Payments orderby p.Timestamp descending select p).FirstOrDefault();
+
+                return lastPayment;
+            }
+        }
         public double TypicalApr
         {
             get
@@ -23,7 +35,7 @@ namespace LA3.Model
                         instalmentFrequency = Finance.InstalmentFrequency.Weekly;
                         break;
                     default:
-                        throw new Exception(string.Format("Bad Period Frequency [{0}]", PaymentPeriod));
+                        throw new Exception($"Bad Period Frequency [{PaymentPeriod}]");
                 }
 
                 var aprCalculator = new Finance.AprCalculator(NetValue);
@@ -47,9 +59,7 @@ namespace LA3.Model
             get
             {
                 var payment = (from p in Payments orderby p.Timestamp descending select p).FirstOrDefault();
-                if (payment == null)
-                    return NextPaymentDate;
-                return payment.Timestamp;
+                return payment?.Timestamp ?? NextPaymentDate;
             }
         }
         public int PlannedNumberOfPayments
@@ -61,14 +71,14 @@ namespace LA3.Model
                 return rv;
             }
         }
-        public string AccountDetailLine
-        {
-            get
-            {
-                var rv = string.Format("{0}: {1}. {2}", NetValue.ToString("C0"), Customer.FullName, Customer.AddressFirstLine);
-                return rv;
-            }
-        }
+        //public string AccountDetailLine
+        //{
+        //    get
+        //    {
+        //        var rv = string.Format("{0}: {1}. {2}", NetValue.ToString("C0"), Customer.FullName, Customer.AddressFirstLine);
+        //        return rv;
+        //    }
+        //}
 
         public AccountStatusChange LatestStatusChange
         {
@@ -108,11 +118,11 @@ namespace LA3.Model
                 if (Id == 0) return 0;
 
                 //todo: get universal error handling sorted
-                if(PaymentPeriod==0)throw new Exception("Payment Period is zero!");
+                if (PaymentPeriod == 0) throw new Exception("Payment Period is zero!");
 
                 //How much should have been paid?
-                int plannedPayments = 0;
-                DateTime rollingDate = StartDate;
+                var plannedPayments = 0;
+                var rollingDate = StartDate;
                 while (rollingDate < DateTime.Today)
                 {
                     if (rollingDate > StartDate) plannedPayments++;
@@ -124,18 +134,12 @@ namespace LA3.Model
                 var plannedAmountPaid = Payment * plannedPayments;
 
                 //How much has been paid?
-                double actualAmountPaid = Payments.Aggregate<Payment, double>(0, (current, p) => current + p.Amount);
+                var actualAmountPaid = Payments.Aggregate<Payment, double>(0, (current, p) => current + p.Amount);
 
                 return plannedAmountPaid - actualAmountPaid;
             }
         }
-        public double Outstanding
-        {
-            get
-            {
-                return GrossValue - AmountPaid;
-            }
-        }
+        public double Outstanding => GrossValue - AmountPaid;
 
         private double AmountPaid
         {
@@ -145,6 +149,8 @@ namespace LA3.Model
                 return Payments.Aggregate<Payment, double>(0, (current, p) => current + p.Amount);
             }
         }
+
+        //todo: Rebate calc
         public double Rebate
         {
             get
@@ -171,7 +177,7 @@ namespace LA3.Model
 
                 //  'When should the loan be paid off?
                 //  dFinish = DateAdd(PaymentPeriod, TotalTheoreticalPayments * Me.Period, Me.Payments(1).PaymentDate)
-                DateTime x = this.PlannedFinishDate;
+                DateTime x = PlannedFinishDate;
 
                 //  'Number of payments left
                 //  lPaymentsToGo = DateDiff(PaymentPeriod, Date, dFinish)
@@ -205,20 +211,13 @@ namespace LA3.Model
             }
         }
 
-        public DateTime PlannedFinishDate
-        {
-            get
-            {
+        private static DateTime PlannedFinishDate => DateTime.Today;
 
-                return DateTime.Today;
-            }
-        }
-
-        public List<Payment> GetPayOffPayments()
-        {
-            var db = new LA_Entities();
-            var payOffPayments = (from p in db.Payments where p.PaidByAccountId == Id select p).ToList();
-            return payOffPayments;
-        }
+        //public List<Payment> GetPayOffPayments()
+        //{
+        //    var db = new LA_Entities();
+        //    var payOffPayments = (from p in db.Payments where p.PaidByAccountId == Id select p).ToList();
+        //    return payOffPayments;
+        //}
     }
 }

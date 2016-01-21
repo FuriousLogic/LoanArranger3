@@ -142,9 +142,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="Report_NotPaid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="weeks" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="LA_ModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountStatus" EntityType="Self.AccountStatus" Schema="dbo" store:Type="Tables" />
@@ -204,9 +201,6 @@
             <End Role="Collectors" EntitySet="Collectors" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <FunctionImport Name="Report_NotPaid" ReturnType="Collection(LA_Model.Report_NotPaid_Result1)">
-            <Parameter Name="weeks" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -355,16 +349,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="Report_NotPaid_Result">
-          <Property Type="Int32" Name="Account_Id" Nullable="false" />
-          <Property Type="DateTime" Name="LastPayment" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="NextPaymentWasDue" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="Report_NotPaid_Result1">
-          <Property Type="Int32" Name="Account_Id" Nullable="false" />
-          <Property Type="DateTime" Name="LastPayment" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="NextPaymentWasDue" Nullable="true" Precision="23" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -454,15 +438,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Report_NotPaid" FunctionName="LA_Model.Store.Report_NotPaid">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LA_Model.Report_NotPaid_Result1">
-                <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
-                <ScalarProperty Name="LastPayment" ColumnName="LastPayment" />
-                <ScalarProperty Name="NextPaymentWasDue" ColumnName="NextPaymentWasDue" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

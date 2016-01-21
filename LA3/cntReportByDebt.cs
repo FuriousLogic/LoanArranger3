@@ -14,12 +14,10 @@ namespace LA3
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            var debt = 0;
+            int debt;
             if (!int.TryParse(txtDebt.Text, out debt)) return;
 
-            var reports = new Reports.Reports();
-            string file = reports.ByDebt(debt);
-
+            var file = Reports.Reports.ByDebt(debt);
             System.Diagnostics.Process.Start(file);
         }
 

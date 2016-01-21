@@ -12,9 +12,6 @@ namespace LA3.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
-    using System.Linq;
     
     public partial class LA_Entities : DbContext
     {
@@ -34,14 +31,5 @@ namespace LA3.Model
         public DbSet<Collector> Collectors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Payment> Payments { get; set; }
-    
-        public virtual ObjectResult<Report_NotPaid_Result1> Report_NotPaid(Nullable<int> weeks)
-        {
-            var weeksParameter = weeks.HasValue ?
-                new ObjectParameter("weeks", weeks) :
-                new ObjectParameter("weeks", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Report_NotPaid_Result1>("Report_NotPaid", weeksParameter);
-        }
     }
 }

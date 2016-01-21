@@ -119,7 +119,7 @@ namespace LA3.Reports
         //        }
         //    }
         //}
-        public string ByDebt(int debt)
+        public static string ByDebt(int debt)
         {
             var document = new Document();
             var pdfPath = ReportHelper.CreateDoc(ref document);
@@ -153,7 +153,6 @@ namespace LA3.Reports
             var customerIds = Functions.GetCustomerIdsByDebt(debt);
             foreach (var customerId in customerIds)
             {
-                if (customerId == null) continue;
                 var customer = db.Customers.Find(customerId);
                 if (customer == null) continue;
 
@@ -162,7 +161,7 @@ namespace LA3.Reports
 
                 //Account Info
                 double totalOutstanding = 0;
-                foreach (Account account in customer.Accounts)
+                foreach (var account in customer.Accounts)
                 {
                     if (!account.CurrentStatus.IsCreated) continue;
 
@@ -215,25 +214,25 @@ namespace LA3.Reports
             ReportHelper.AddCell(tbl, "Next Payment Due", 1, Element.ALIGN_CENTER, fontColumnHeader, Rectangle.BOTTOM_BORDER, 10);
 
             //Data
-            var results = _db.Report_NotPaid(weeks).ToList();
-            //List<Account> badAccounts = (from a in db.Accounts where a.NextPaymentDate < cutoff orderby a.NextPaymentDate ascending select a).ToList();
-            foreach (var result in results)
+            var accountIds = Functions.AccountsNotPaidForWeeks(weeks);
+            foreach (var accountId in accountIds)
             {
-                if (result == null) continue;
-                if (result.LastPayment == null) continue;
-                if (result.NextPaymentWasDue == null) continue;
+                if (accountId == null) continue;
+                //if (notpaid.NextPaymentWasDue == null) continue;
 
-                var account = (from a in _db.Accounts where a.Id == result.Account_Id select a).FirstOrDefault();
+                //var account = (from a in _db.Accounts where a.Id == notpaid.Account_Id select a).FirstOrDefault();
+                var account = _db.Accounts.Find(accountId);
                 if (account == null) throw new Exception("Can't find Account");
                 if (account.CurrentStatus.Status != "Created") continue;
 
-                //DateTime dt = DateTime.Parse(dr["LastPayment"].ToString());
+                if (account.Payments?.Count == 0) continue;
+
                 ReportHelper.AddCell(tbl, account.InvoiceCode, 1, Element.ALIGN_LEFT, fontNormal, Rectangle.RIGHT_BORDER, 10);
                 ReportHelper.AddCell(tbl, account.NetValue.ToString("£0.00"), 1, Element.ALIGN_RIGHT, fontNormal, Rectangle.RIGHT_BORDER, 10);
                 ReportHelper.AddCell(tbl, account.Outstanding.ToString("£0.00"), 1, Element.ALIGN_RIGHT, fontNormal, Rectangle.RIGHT_BORDER, 10);
                 ReportHelper.AddCell(tbl, account.Customer.FullName, 1, Element.ALIGN_LEFT, fontNormal, Rectangle.RIGHT_BORDER, 10);
-                ReportHelper.AddCell(tbl, ((DateTime)result.LastPayment).ToString("dd/MMM/yyyy"), 1, Element.ALIGN_CENTER, fontNormal, Rectangle.NO_BORDER, 10);
-                ReportHelper.AddCell(tbl, ((DateTime)result.NextPaymentWasDue).ToString("dd/MMM/yyyy"), 1, Element.ALIGN_CENTER, fontNormal, Rectangle.NO_BORDER, 10);
+                ReportHelper.AddCell(tbl, account.LastPayment.Timestamp.ToString("dd/MMM/yyyy"), 1, Element.ALIGN_CENTER, fontNormal, Rectangle.NO_BORDER, 10);
+                ReportHelper.AddCell(tbl, account.NextPaymentDate.ToString("dd/MMM/yyyy"), 1, Element.ALIGN_CENTER, fontNormal, Rectangle.NO_BORDER, 10);
             }
 
             document.Add(tbl);
@@ -334,7 +333,7 @@ namespace LA3.Reports
 
             //Final Summary
             AddCell(fontColumnHeader, tbl, leading, "");
-            if (total == collected)
+            if (Math.Abs(total - collected) < 0.01)
             {
                 AddCell(fontColumnHeader, tbl, leading, "Exact Match");
                 AddCell(fontColumnHeader, tbl, leading, "");
