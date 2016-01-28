@@ -150,14 +150,12 @@ namespace LA3.Model
             }
         }
 
-        //todo: Rebate calc
         public double Rebate
         {
             get
             {
                 //  Dim dFinish As Date
                 //  Dim lPaymentsToGo As Long
-                //  Dim PaymentPeriod As String
                 //  Dim dCharge As Double
                 //  Dim dSettlement As Double
                 //  Dim TotalTheoreticalPayments As Integer
@@ -165,23 +163,26 @@ namespace LA3.Model
                 //No Payments = No Rebate
                 if (Payments.Count == 0) return 0;
 
-                //  'Project finish date
-                //  If Me.Monthly Then
-                //    PaymentPeriod = "m"
-                //  Else
-                //    PaymentPeriod = "ww"
-                //  End If
+                //Project finish date
+                //var paymentPeriod = PayMonthly ? "m" : "ww";
 
-                //  'How many payments should there be?
-                //  TotalTheoreticalPayments = CInt(Me.TotalAmount / Me.Payment)
+                //How many payments should there be?
+                //TotalTheoreticalPayments = CInt(Me.TotalAmount / Me.Payment)
+                var totalPayments = (int)(GrossValue / Payment);
 
-                //  'When should the loan be paid off?
+                //When should the loan be paid off?
                 //  dFinish = DateAdd(PaymentPeriod, TotalTheoreticalPayments * Me.Period, Me.Payments(1).PaymentDate)
-                DateTime x = PlannedFinishDate;
+                DateTime finishDate;
+                if (PayMonthly)
+                    finishDate = FirstPayment.AddMonths(totalPayments);
+                else
+                    finishDate = FirstPayment.AddDays(totalPayments * 7);
+                //DateTime x = PlannedFinishDate;
 
                 //  'Number of payments left
                 //  lPaymentsToGo = DateDiff(PaymentPeriod, Date, dFinish)
                 //  lPaymentsToGo = lPaymentsToGo / Me.Period
+                var paymentsRemainig = (int)(Outstanding / Payment);
 
                 //  'Charge for loan
                 //  dCharge = Me.TotalAmount - Me.RetailPrice
@@ -192,13 +193,22 @@ namespace LA3.Model
                 //  Else
                 //    dSettlement = CInt(8 / Me.Period)
                 //  End If
+                var settlement = 0;
+                if (PayMonthly)
+                    settlement = (int)(2 / PaymentPeriod);
+                else
+                    settlement = (int)(8 / PaymentPeriod);
 
                 //  lPaymentsToGo = lPaymentsToGo - dSettlement
+                paymentsRemainig = paymentsRemainig - settlement;
+                if (paymentsRemainig <= 0) return 0;
                 //  If lPaymentsToGo > 0 Then
                 //    Rebate = ((lPaymentsToGo * (lPaymentsToGo + 1)) / (TotalTheoreticalPayments * (TotalTheoreticalPayments + 1))) * dCharge
                 //  Else
                 //    Rebate = 0
                 //  End If
+                var rv = ((paymentsRemainig*(paymentsRemainig + 1))/(totalPayments*(totalPayments + 1)))*Interest;
+                if (rv <= 0) return 0;
 
                 //  'Round
                 //  If Rebate > 0 Then
@@ -206,8 +216,9 @@ namespace LA3.Model
                 //    Rebate = CLng(Rebate)
                 //    Rebate = Rebate / 100
                 //  End If
+                
 
-                return -1;
+                return (int)rv;
             }
         }
 

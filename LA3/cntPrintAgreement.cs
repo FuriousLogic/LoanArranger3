@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -39,18 +40,19 @@ namespace LA3
         {
             foreach (Account acc in lstAccounts.SelectedItems)
             {
-                string period = acc.PayMonthly ? "month" : "week";
-                int numOfPayments = (acc.PlannedNumberOfPayments * acc.PaymentPeriod);
-                string durationText = String.Format("The agreement will have a minimum duration of {0} {1}s", numOfPayments.ToString(CultureInfo.InvariantCulture), period);
+                var period = acc.PayMonthly ? "month" : "week";
+                var numOfPayments = acc.PlannedNumberOfPayments * acc.PaymentPeriod;
+                var durationText =
+                    $"The agreement will have a minimum duration of {numOfPayments.ToString(CultureInfo.InvariantCulture)} {period}s";
 
                 //Loans paid off
                 double paidOffAmount = 0;
-                string lpoText = "";
-                List<Payment> paymentsPaidByThisAccount = (from p in _db.Payments where p.PaidByAccountId == acc.Id select p).ToList();
+                var lpoText = "";
+                var paymentsPaidByThisAccount = (from p in _db.Payments where p.PaidByAccountId == acc.Id select p).ToList();
                 if (paymentsPaidByThisAccount.Count > 0)
                 {
                     lpoText += "(";
-                    foreach (Payment p in paymentsPaidByThisAccount)
+                    foreach (var p in paymentsPaidByThisAccount)
                     {
                         paidOffAmount += p.Amount;
                         lpoText += p.Account.InvoiceCode + ", ";
@@ -58,13 +60,13 @@ namespace LA3
                     lpoText = lpoText.Substring(0, lpoText.Length - 2) + ")";
                 }
 
-                string repayablePeriod = "The loan will be repayable in " + acc.PlannedNumberOfPayments.ToString(CultureInfo.InvariantCulture) + " installments and each subsequent " + period + "ly payment will be due on the same day each succeeding " + period;
-                string repaymentText = "Your " + period + "ly repayment will be";
+                var repayablePeriod = "The loan will be repayable in " + acc.PlannedNumberOfPayments.ToString(CultureInfo.InvariantCulture) + " installments and each subsequent " + period + "ly payment will be due on the same day each succeeding " + period;
+                var repaymentText = "Your " + period + "ly repayment will be";
 
                 //Generate PDF
-                Font headerFont = FontFactory.GetFont("Arial", 10);
-                Font normalFont = FontFactory.GetFont("Arial", 8);
-                Font smallFont = FontFactory.GetFont("Arial", 7);
+                var headerFont = FontFactory.GetFont("Arial", 10);
+                var normalFont = FontFactory.GetFont("Arial", 8);
+                var smallFont = FontFactory.GetFont("Arial", 7);
                 var document = new Document(PageSize.A4, 25, 25, 30, 30);
                 var pdfPath = ReportHelper.CreateDoc(ref document);
                 document.Open();
@@ -128,21 +130,25 @@ namespace LA3
                 document.Close();
 
                 //todo: replace this with auto printing code
-                int copies = Settings.Default.AgreementsToPrint;
+                var copies = Settings.Default.AgreementsToPrint;
                 Process.Start(pdfPath);
 
-                //bool onScreen = Settings.Default.AgreementsToScreen;
+                //var onScreen = Settings.Default.AgreementsToScreen;
                 //if (onScreen)
-                //{
-                //    var showAg = new frmShowAgreement();
-                //    showAg.ReportViewer.ReportSource = ag;
-                //    showAg.ShowDialog();
-                //}
+                //    Process.Start(pdfPath);
                 //else
-                //    ag.PrintToPrinter(copies, false, 0, 0);
+                //{
+                //    //ag.PrintToPrinter(copies, false, 0, 0);
+                //    var reader = new PdfReader(pdfPath);
+                //    using (var memoryStream = new MemoryStream())
+                //    {
+                //        var writer = PdfWriter.GetInstance(document, memoryStream);
+                //        document.Open();
+                //    }
+                //}
             }
 
-            if (MessageBox.Show("Did the Agreements print correctly?", "Confirm Printing", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (MessageBox.Show(@"Did the Agreements print correctly?", @"Confirm Printing", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 foreach (Account acc in lstAccounts.SelectedItems)
                     acc.PrintedForm = true;

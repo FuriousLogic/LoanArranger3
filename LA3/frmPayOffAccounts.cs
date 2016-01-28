@@ -16,16 +16,16 @@ namespace LA3
         private readonly List<int> _accountIDs = new List<int>();
         private readonly LA_Entities _db = new LA_Entities();
 
-        public FrmPayOffAccounts(int parentID, IEnumerable<Account> accounts)
+        public FrmPayOffAccounts(int parentId, IEnumerable<Account> accounts)
         {
             InitializeComponent();
-            ShowAccounts(parentID, accounts);
+            ShowAccounts(parentId, accounts);
             ShowDialog();
         }
 
-        private void ShowAccounts(int parentID, IEnumerable<Account> accounts)
+        private void ShowAccounts(int parentId, IEnumerable<Account> accounts)
         {
-            _parentAccount = _db.Accounts.Find(parentID);
+            _parentAccount = _db.Accounts.Find(parentId);
             txtNetValue.Text = _parentAccount.NetValue.ToString("£0.00");
 
             _accountIDs.Clear();
@@ -120,7 +120,7 @@ namespace LA3
             }
             _db.SaveChanges();
 
-            toolStripStatusLabel1.Text = "Payments made: " + totalPayments.ToString("£0.00");
+            toolStripStatusLabel1.Text = @"Payments made: " + totalPayments.ToString("£0.00");
 
             var accounts = _accountIDs.Select(id => _db.Accounts.Find(id)).ToList();
             ShowAccounts(_parentAccount.Id, accounts);
