@@ -61,7 +61,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -78,7 +78,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -91,7 +91,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -104,7 +104,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -117,7 +117,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -130,7 +130,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -143,7 +143,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -174,7 +174,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -201,7 +201,7 @@ namespace LA3
                 _cSundry = new CntSundry();
                 _cReportNotPaid = new CntReportNotPaid();
                 _cReportByDebt = new CntReportByDebt();
-                _cPrintAgreement = new CntPrintAgreement();
+                //_cPrintAgreement = new CntPrintAgreement();
                 _cLastMonthsPayments = new CntLastMonthsPayments();
                 _cReportSundries = new CntReportSundries();
 
@@ -209,7 +209,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -223,7 +223,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -236,7 +236,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -248,7 +248,7 @@ namespace LA3
             }
             catch (Exception e)
             {
-                ShowError(e);
+                Functions.ShowError(e);
             }
         }
 
@@ -261,7 +261,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -274,7 +274,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -289,7 +289,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -301,7 +301,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -313,7 +313,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -321,11 +321,12 @@ namespace LA3
         {
             try
             {
+                _cPrintAgreement = new CntPrintAgreement();
                 ShowControl(_cPrintAgreement, "Print Agreements");
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -337,7 +338,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -350,7 +351,7 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
 
@@ -408,14 +409,8 @@ namespace LA3
             }
             catch (Exception exception)
             {
-                ShowError(exception);
+                Functions.ShowError(exception);
             }
         }
-
-        private static void ShowError(Exception exception)
-        {
-            MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
     }
 }

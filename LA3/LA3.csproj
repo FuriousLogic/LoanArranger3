@@ -263,6 +263,7 @@
       <DependentUpon>LA_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="PaymentInfo.cs" />
+    <Compile Include="Pdf.cs" />
     <Compile Include="PdfPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,6 +7,8 @@ namespace LA3.Reports
 {
     public static class ReportHelper
     {
+        private static string _filenamePrefix;
+
         public static void AddCell(PdfPTable tbl, string text, int rowSpan, int alignment, Font font, int cellBorder, int leading)
         {
             AddCell(tbl, text, rowSpan, alignment, font, cellBorder, 1, leading);
@@ -36,9 +38,10 @@ namespace LA3.Reports
             if(di==null)
                 throw new Exception("Error getting Temp Path!");
 
+            _filenamePrefix = "LA3_";
             foreach (var fi in di.GetFiles())
             {
-                if (!fi.Name.StartsWith("LA3_")) continue;
+                if (!fi.Name.StartsWith(_filenamePrefix)) continue;
                 if (fi.Name.EndsWith(".pdf"))
                 {
                     if (fi.CreationTime.AddDays(1) < DateTime.Now)
@@ -47,7 +50,7 @@ namespace LA3.Reports
             }
 
             //Setup folder & filename
-            var filename = "LA3_" + Guid.NewGuid() + ".pdf";
+            var filename = _filenamePrefix + Guid.NewGuid() + ".pdf";
             var pdfPath = Path.GetTempPath();
             pdfPath = Path.Combine(pdfPath, filename);
 

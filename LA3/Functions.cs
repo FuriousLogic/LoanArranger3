@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using LA3.Model;
 
 namespace LA3
@@ -10,14 +12,14 @@ namespace LA3
         internal static bool IsPosDbl(string txt)
         {
             double d;
-            if (!double.TryParse(txt, out d)) return false;
+            if (!Double.TryParse(txt, out d)) return false;
 
             return (d >= 0);
         }
         internal static bool IsDbl(string txt)
         {
             double d;
-            return double.TryParse(txt, out d);
+            return Double.TryParse(txt, out d);
         }
 
         public static List<int> GetCustomerIdsByDebt(int debt)
@@ -46,7 +48,7 @@ namespace LA3
     having  sum(a.GrossValue - amtPaid.Paid) >= {0}
     order by sum(a.GrossValue - amtPaid.Paid) desc
 ";
-            sql = string.Format(sql, debt);
+            sql = String.Format(sql, debt);
             var customerIds = db.Database.SqlQuery<int>(sql).ToList();
             return customerIds;
         }
@@ -75,9 +77,14 @@ namespace LA3
 	where	np.NextPaymentWasDue	< @cutoffDate
 	order by np.NextPaymentWasDue	asc
 ";
-            sql = string.Format(sql, weeks);
+            sql = String.Format(sql, weeks);
             var customerIds = db.Database.SqlQuery<int>(sql).ToList();
             return customerIds;
+        }
+
+        internal static void ShowError(Exception exception)
+        {
+            MessageBox.Show(exception.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

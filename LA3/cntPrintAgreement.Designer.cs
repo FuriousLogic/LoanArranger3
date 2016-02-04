@@ -34,12 +34,13 @@
             // 
             // lstAccounts
             // 
-            this.lstAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstAccounts.FormattingEnabled = true;
             this.lstAccounts.Location = new System.Drawing.Point(4, 4);
             this.lstAccounts.Name = "lstAccounts";
+            this.lstAccounts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstAccounts.Size = new System.Drawing.Size(546, 355);
             this.lstAccounts.TabIndex = 0;
             // 
@@ -54,7 +55,7 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // cntPrintAgreement
+            // CntPrintAgreement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

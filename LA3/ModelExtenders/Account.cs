@@ -71,14 +71,14 @@ namespace LA3.Model
                 return rv;
             }
         }
-        //public string AccountDetailLine
-        //{
-        //    get
-        //    {
-        //        var rv = string.Format("{0}: {1}. {2}", NetValue.ToString("C0"), Customer.FullName, Customer.AddressFirstLine);
-        //        return rv;
-        //    }
-        //}
+        public string AccountDetailLine
+        {
+            get
+            {
+                var rv = $"{NetValue.ToString("C0")}: {Customer.FullName}. {Customer.AddressFirstLine}";
+                return rv;
+            }
+        }
 
         public AccountStatusChange LatestStatusChange
         {
@@ -117,7 +117,6 @@ namespace LA3.Model
             {
                 if (Id == 0) return 0;
 
-                //todo: get universal error handling sorted
                 if (PaymentPeriod == 0) throw new Exception("Payment Period is zero!");
 
                 //How much should have been paid?

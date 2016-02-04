@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -129,23 +127,15 @@ namespace LA3
                 document.Add(tMain);
                 document.Close();
 
-                //todo: replace this with auto printing code
-                var copies = Settings.Default.AgreementsToPrint;
-                Process.Start(pdfPath);
+                ////todo: replace this with auto printing code
+                //var copies = Settings.Default.AgreementsToPrint;
+                //Process.Start(pdfPath);
 
-                //var onScreen = Settings.Default.AgreementsToScreen;
-                //if (onScreen)
-                //    Process.Start(pdfPath);
-                //else
-                //{
-                //    //ag.PrintToPrinter(copies, false, 0, 0);
-                //    var reader = new PdfReader(pdfPath);
-                //    using (var memoryStream = new MemoryStream())
-                //    {
-                //        var writer = PdfWriter.GetInstance(document, memoryStream);
-                //        document.Open();
-                //    }
-                //}
+                var onScreen = Settings.Default.AgreementsToScreen;
+                if (onScreen)
+                    Process.Start(pdfPath);
+                else
+                    Pdf.PrintPdf(pdfPath);
             }
 
             if (MessageBox.Show(@"Did the Agreements print correctly?", @"Confirm Printing", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
