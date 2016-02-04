@@ -58,7 +58,7 @@ namespace LA3
 
             //Do we need to continue?
             if (cmbCollector.SelectedIndex == -1) return;
-            if (String.IsNullOrEmpty(((Collector)cmbCollector.SelectedItem).CollectorName)) return;
+            if (string.IsNullOrEmpty(((Collector)cmbCollector.SelectedItem).CollectorName)) return;
 
             cmbCollector.Enabled = false;
             dtCollection.Enabled = false;
@@ -94,6 +94,7 @@ namespace LA3
         {
             var collector = (Collector)e.Argument;
             var accountsForCollection = collector.GetAccountsForCollection(dtCollection.Value);
+            accountsForCollection = (from a in accountsForCollection orderby a.Customer.Surname, a.Customer.Id select a).ToList();
 
             if (accountsForCollection.Count == 0)
                 MessageBox.Show("No Results", "LA3", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -228,9 +229,9 @@ namespace LA3
                     }
 
                     //Is this account being overpaid?
-                    float payment = float.Parse(paymentCell.Value.ToString());
-                    float outstanding = float.Parse(r.Cells["Outstanding"].Value.ToString());
-                    if (outstanding < payment)
+                    var payment = float.Parse(paymentCell.Value.ToString());
+                    var outstanding = float.Parse(r.Cells["Outstanding"].Value.ToString());
+                    if ((outstanding < payment) && payment > 0)
                     {
                         isValid = false;
                         paymentCell.Style.BackColor = Color.LightPink;
