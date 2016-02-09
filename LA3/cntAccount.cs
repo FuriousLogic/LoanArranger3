@@ -13,13 +13,25 @@ namespace LA3
         public event DelShowStatusText EvShowStatusText;
         public event DelShowSundry EvShowSundry;
         public event DelShowCustomer EvShowCustomer;
-        public event DelBackToMain EvBackToMain; 
+        public event DelBackToMain EvBackToMain;
         private LA_Entities _db = new LA_Entities();
+        private readonly ErrorProvider _epGrossValue;
+        private readonly ErrorProvider _epIsMonthly;
+        private readonly ErrorProvider _epNetValue;
+        private readonly ErrorProvider _epPayment;
+        private readonly ErrorProvider _epPaymentPeriod;
+        private readonly ErrorProvider _epInterest;
 
         #region Constructors
         public CntAccount()
         {
             InitializeComponent();
+            _epGrossValue = new ErrorProvider();
+            _epIsMonthly = new ErrorProvider();
+            _epNetValue = new ErrorProvider();
+            _epPayment = new ErrorProvider();
+            _epPaymentPeriod = new ErrorProvider();
+            _epInterest = new ErrorProvider();
         }
         #endregion
 
@@ -65,7 +77,7 @@ namespace LA3
 
                     //Get Customer Details
                     var customer = _db.Customers.Find(_currentAccount.Customer_Id);
-                    if (customer == null) throw new Exception(string.Format("Can't find Customer [{0}]", _currentAccount.Customer_Id));
+                    if (customer == null) throw new Exception($"Can't find Customer [{_currentAccount.Customer_Id}]");
 
                     txtAddress.Text = customer.Address;
                     txtCustomerName.Text = customer.FullName;
@@ -93,10 +105,8 @@ namespace LA3
                     if (_currentAccount.Id == 0)
                     {
                         txtNetValue.ReadOnly = false;
-                        txtGrossValue.ReadOnly = false;
+                        txtInterest.ReadOnly = false;
                     }
-
-
                 }
             }
 
@@ -107,7 +117,7 @@ namespace LA3
         {
             _db = new LA_Entities();
 
-            dtNextPayment.CustomFormat = "ddd: dd-MMM-yyyy";
+            dtNextPayment.CustomFormat = @"ddd: dd-MMM-yyyy";
             ClearAccount();
             txtInvoiceCode.Focus();
         }
@@ -121,12 +131,15 @@ namespace LA3
         }
         private void SaveValues()
         {
-            bool isNewAccount = (_currentAccount.Id == 0);
+            var isNewAccount = (_currentAccount.Id == 0);
+
+            var interest = float.Parse(txtInterest.Text);
+            var netValue = float.Parse(txtNetValue.Text);
 
             _currentAccount.Customer.Notes = txtCustomerNotes.Text;
-            _currentAccount.GrossValue = float.Parse(txtGrossValue.Text);
+            _currentAccount.GrossValue = netValue + interest;
             _currentAccount.LastChecked = DateTime.Now;
-            _currentAccount.NetValue = float.Parse(txtNetValue.Text);
+            _currentAccount.NetValue = netValue;
             _currentAccount.Notes = txtNotes.Text.Trim();
             _currentAccount.Payment = float.Parse(txtPayment.Text);
             _currentAccount.PaymentPeriod = (int)udPaymentPeriod.Value;
@@ -150,67 +163,57 @@ namespace LA3
 
         private bool IsValid()
         {
-            bool returnValue = true;
+            var returnValue = true;
             ClearErrorProviders();
 
-            if (!Functions.IsPosDbl(txtGrossValue.Text))
-            {
-                epGrossValue.SetError(txtGrossValue, "Must be positive number");
-                returnValue = false;
-            }
             if (cmbPeriod.SelectedIndex == -1)
             {
-                epIsMonthly.SetError(cmbPeriod, "Select a payment period");
+                _epIsMonthly.SetError(cmbPeriod, "Select a payment period");
                 returnValue = false;
             }
             if (!Functions.IsPosDbl(txtNetValue.Text))
             {
-                epNetValue.SetError(txtNetValue, "Must be positive number");
+                _epNetValue.SetError(txtNetValue, "Must be positive number");
                 returnValue = false;
             }
             else
             {
                 if (_currentAccount.Customer.Maxloan > 0)
                 {
-                    double d = double.Parse(txtNetValue.Text);
+                    var d = double.Parse(txtNetValue.Text);
                     if (_currentAccount.Customer.Maxloan < d)
                     {
-                        epNetValue.SetError(txtNetValue, "Max Loan: " + _currentAccount.Customer.Maxloan.ToString("£0.00"));
+                        _epNetValue.SetError(txtNetValue, "Max Loan: " + _currentAccount.Customer.Maxloan.ToString("£0.00"));
                         returnValue = false;
                     }
                 }
             }
+            if (!Functions.IsPosDbl(txtInterest.Text))
+            {
+                _epInterest.SetError(txtPayment, "Must be positive number");
+                returnValue = false;
+            }
             if (!Functions.IsPosDbl(txtPayment.Text))
             {
-                epPayment.SetError(txtPayment, "Must be positive number");
+                _epPayment.SetError(txtPayment, "Must be positive number");
                 returnValue = false;
             }
             if (udPaymentPeriod.Value == 0)
             {
-                epPaymentPeriod.SetError(udPaymentPeriod, "Must be positive number");
+                _epPaymentPeriod.SetError(udPaymentPeriod, "Must be positive number");
                 returnValue = false;
-            }
-
-            if (returnValue)
-            {
-                double net = double.Parse(txtNetValue.Text);
-                double gross = double.Parse(txtGrossValue.Text);
-                if (net >= gross)
-                {
-                    epGrossValue.SetError(txtGrossValue, "Must be more than net");
-                    returnValue = false;
-                }
             }
 
             return returnValue;
         }
         private void ClearErrorProviders()
         {
-            epGrossValue.SetError(txtGrossValue, "");
-            epIsMonthly.SetError(cmbPeriod, "");
-            epNetValue.SetError(txtNetValue, "");
-            epPayment.SetError(txtPayment, "");
-            epPaymentPeriod.SetError(udPaymentPeriod, "");
+            _epGrossValue.SetError(txtGrossValue, "");
+            _epIsMonthly.SetError(cmbPeriod, "");
+            _epNetValue.SetError(txtNetValue, "");
+            _epPayment.SetError(txtPayment, "");
+            _epPaymentPeriod.SetError(udPaymentPeriod, "");
+            _epInterest.SetError(udPaymentPeriod, "");
         }
 
         private void dtNextPayment_ValueChanged(object sender, EventArgs e)
@@ -219,11 +222,11 @@ namespace LA3
                 return;
 
             var customer = _db.Customers.Find(_currentAccount.Customer_Id);
-            if (customer == null) throw new Exception(string.Format("Can't find Customer [{0}]", _currentAccount.Customer_Id));
+            if (customer == null) throw new Exception($"Can't find Customer [{_currentAccount.Customer_Id}]");
 
             if ((int)dtNextPayment.Value.DayOfWeek != customer.PreferredDay)
             {
-                if (MessageBox.Show("This day does not match the customer's preferred day.  Do you want to change the customer's preferred day to " + dtNextPayment.Value.DayOfWeek.ToString() + "?", "Day Change", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(@"This day does not match the customer's preferred day.  Do you want to change the customer's preferred day to " + dtNextPayment.Value.DayOfWeek.ToString() + "?", "Day Change", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     customer.PreferredDay = (int)dtNextPayment.Value.DayOfWeek;
                     _db.SaveChanges();
@@ -242,20 +245,19 @@ namespace LA3
 
         private void txtInvoiceCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
-            {
-                if (txtInvoiceCode.Text.Trim().Length != 8) return;
+            if (e.KeyChar != 13) return;
 
-                if (_currentAccount != null)
-                    _currentAccount.LockedByUser = "";
+            if (txtInvoiceCode.Text.Trim().Length != 8) return;
 
-                int yr;
-                int inv;
-                if (!int.TryParse(txtInvoiceCode.Text.Substring(1, 2), out yr)) return;
-                if (!int.TryParse(txtInvoiceCode.Text.Substring(4), out inv)) return;
-                _currentAccount = (from a in _db.Accounts where a.StartDate.Year == yr && a.InvoiceNumber == inv select a).FirstOrDefault();
-                if (_currentAccount != null) ShowAccount();
-            }
+            if (_currentAccount != null)
+                _currentAccount.LockedByUser = "";
+
+            int yr;
+            int inv;
+            if (!int.TryParse(txtInvoiceCode.Text.Substring(1, 2), out yr)) return;
+            if (!int.TryParse(txtInvoiceCode.Text.Substring(4), out inv)) return;
+            _currentAccount = (from a in _db.Accounts where a.StartDate.Year == yr && a.InvoiceNumber == inv select a).FirstOrDefault();
+            if (_currentAccount != null) ShowAccount();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -278,7 +280,7 @@ namespace LA3
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Delete this account.  Are you sure?", "Delete Account", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show(@"Delete this account.  Are you sure?", @"Delete Account", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
 
             var newStatus = (from s in _db.AccountStatus where s.Status == "Deleted" select s).FirstOrDefault();
@@ -286,11 +288,11 @@ namespace LA3
 
             _db.AccountStatusChanges.Add(
                 new AccountStatusChange
-                    {
-                        Account_Id = _currentAccount.Id,
-                        AccountStatus_Id = newStatus.Id,
-                        Timestamp = DateTime.Now
-                    });
+                {
+                    Account_Id = _currentAccount.Id,
+                    AccountStatus_Id = newStatus.Id,
+                    Timestamp = DateTime.Now
+                });
             _db.SaveChanges();
             if (EvShowStatusText != null) EvShowStatusText("Account: " + _currentAccount.InvoiceCode + ". Deleted");
             ClearAccount();
@@ -346,17 +348,17 @@ namespace LA3
 
             txtInvoiceCode.Focus();
         }
-        public void CreateNewAccount(int customerID)
+        public void CreateNewAccount(int customerId)
         {
             //Get next invoice number
-            int lastInvoiceNumber = (from a in _db.Accounts where a.StartDate.Year == DateTime.Today.Year orderby a.InvoiceNumber descending select a.InvoiceNumber).FirstOrDefault();
+            var lastInvoiceNumber = (from a in _db.Accounts where a.StartDate.Year == DateTime.Today.Year orderby a.InvoiceNumber descending select a.InvoiceNumber).FirstOrDefault();
 
             //Create new Account
             var accountStatus = (from stat in _db.AccountStatus where stat.Status.Equals("created", StringComparison.InvariantCultureIgnoreCase) select stat).FirstOrDefault();
             if (accountStatus == null) throw new Exception("Error creating new Account");
             _currentAccount = new Account
             {
-                Customer_Id = customerID,
+                Customer_Id = customerId,
                 GrossValue = 0,
                 InvoiceNumber = lastInvoiceNumber + 1,
                 LastChecked = DateTime.Now,
@@ -379,15 +381,15 @@ namespace LA3
 
             ShowAccount();
         }
-        public void LoadAccount(int accountID)
+        public void LoadAccount(int accountId)
         {
-            _currentAccount = _db.Accounts.Find(accountID);
+            _currentAccount = _db.Accounts.Find(accountId);
 
             //Is this account locked by someone else?
             if (_currentAccount.LockedByUser.Length > 0 && _currentAccount.LockedByUser != Properties.Settings.Default.User)
             {
                 //Is it to be unlocked?
-                if (MessageBox.Show("This account is currently locked by " + _currentAccount.LockedByUser + ".  Do you want to unlock it?", "Account Locked", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show(@"This account is currently locked by " + _currentAccount.LockedByUser + @".  Do you want to unlock it?", "Account Locked", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     _currentAccount.LockedByUser = "";
                     _db.SaveChanges();
@@ -465,5 +467,6 @@ namespace LA3
             //frmChart frm = new frmChart();
             //frm.Image = engine.GetBitmap();
         }
+
     }
 }

@@ -28,7 +28,6 @@ namespace LA3
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInvoiceCode = new System.Windows.Forms.TextBox();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
@@ -61,11 +60,6 @@ namespace LA3
             this.label16 = new System.Windows.Forms.Label();
             this.txtOverdue = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.epNetValue = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epGrossValue = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epPaymentPeriod = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epIsMonthly = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epPayment = new System.Windows.Forms.ErrorProvider(this.components);
             this.txtGrossValue = new System.Windows.Forms.TextBox();
             this.dtNextPayment = new System.Windows.Forms.DateTimePicker();
             this.btnCustomer = new System.Windows.Forms.Button();
@@ -76,11 +70,6 @@ namespace LA3
             this.btnChart = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.udPaymentPeriod)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epNetValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epGrossValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPaymentPeriod)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epIsMonthly)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -222,7 +211,7 @@ namespace LA3
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(334, 60);
+            this.label9.Location = new System.Drawing.Point(334, 85);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 13);
             this.label9.TabIndex = 17;
@@ -230,16 +219,15 @@ namespace LA3
             // 
             // txtInterest
             // 
-            this.txtInterest.Location = new System.Drawing.Point(413, 82);
+            this.txtInterest.Location = new System.Drawing.Point(413, 56);
             this.txtInterest.Name = "txtInterest";
-            this.txtInterest.ReadOnly = true;
             this.txtInterest.Size = new System.Drawing.Size(143, 20);
-            this.txtInterest.TabIndex = 18;
+            this.txtInterest.TabIndex = 5;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(334, 85);
+            this.label10.Location = new System.Drawing.Point(334, 59);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 13);
             this.label10.TabIndex = 19;
@@ -309,7 +297,7 @@ namespace LA3
             this.txtPayment.Location = new System.Drawing.Point(413, 161);
             this.txtPayment.Name = "txtPayment";
             this.txtPayment.Size = new System.Drawing.Size(143, 20);
-            this.txtPayment.TabIndex = 8;
+            this.txtPayment.TabIndex = 7;
             // 
             // label14
             // 
@@ -364,30 +352,11 @@ namespace LA3
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // epNetValue
-            // 
-            this.epNetValue.ContainerControl = this;
-            // 
-            // epGrossValue
-            // 
-            this.epGrossValue.ContainerControl = this;
-            // 
-            // epPaymentPeriod
-            // 
-            this.epPaymentPeriod.ContainerControl = this;
-            // 
-            // epIsMonthly
-            // 
-            this.epIsMonthly.ContainerControl = this;
-            // 
-            // epPayment
-            // 
-            this.epPayment.ContainerControl = this;
-            // 
             // txtGrossValue
             // 
-            this.txtGrossValue.Location = new System.Drawing.Point(413, 56);
+            this.txtGrossValue.Location = new System.Drawing.Point(413, 81);
             this.txtGrossValue.Name = "txtGrossValue";
+            this.txtGrossValue.ReadOnly = true;
             this.txtGrossValue.Size = new System.Drawing.Size(143, 20);
             this.txtGrossValue.TabIndex = 5;
             // 
@@ -397,7 +366,7 @@ namespace LA3
             this.dtNextPayment.Location = new System.Drawing.Point(413, 187);
             this.dtNextPayment.Name = "dtNextPayment";
             this.dtNextPayment.Size = new System.Drawing.Size(143, 20);
-            this.dtNextPayment.TabIndex = 9;
+            this.dtNextPayment.TabIndex = 8;
             this.dtNextPayment.ValueChanged += new System.EventHandler(this.dtNextPayment_ValueChanged);
             // 
             // btnCustomer
@@ -471,7 +440,7 @@ namespace LA3
             this.lblStatus.Text = "status";
             this.lblStatus.Visible = false;
             // 
-            // cntAccount
+            // CntAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -517,14 +486,9 @@ namespace LA3
             this.Controls.Add(this.txtInvoiceCode);
             this.Controls.Add(this.label1);
             this.Name = "CntAccount";
-            this.Size = new System.Drawing.Size(577, 308);
+            this.Size = new System.Drawing.Size(581, 308);
             this.Load += new System.EventHandler(this.cntAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.udPaymentPeriod)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epNetValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epGrossValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPaymentPeriod)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epIsMonthly)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epPayment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -564,11 +528,6 @@ namespace LA3
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtOverdue;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.ErrorProvider epNetValue;
-        private System.Windows.Forms.ErrorProvider epGrossValue;
-        private System.Windows.Forms.ErrorProvider epPaymentPeriod;
-        private System.Windows.Forms.ErrorProvider epIsMonthly;
-        private System.Windows.Forms.ErrorProvider epPayment;
         private System.Windows.Forms.TextBox txtGrossValue;
         private System.Windows.Forms.DateTimePicker dtNextPayment;
         private System.Windows.Forms.Button btnCustomer;

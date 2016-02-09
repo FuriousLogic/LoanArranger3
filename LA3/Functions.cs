@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using LA3.Model;
+using static System.Double;
 
 namespace LA3
 {
@@ -12,17 +13,17 @@ namespace LA3
         internal static bool IsPosDbl(string txt)
         {
             double d;
-            if (!Double.TryParse(txt, out d)) return false;
+            if (!TryParse(txt, out d)) return false;
 
-            return (d >= 0);
+            return (d > 0);
         }
         internal static bool IsDbl(string txt)
         {
             double d;
-            return Double.TryParse(txt, out d);
+            return TryParse(txt, out d);
         }
 
-        public static List<int> GetCustomerIdsByDebt(int debt)
+        public static IEnumerable<int> GetCustomerIdsByDebt(int debt)
         {
             var db = new LA_Entities();
             var sql = @"
@@ -48,7 +49,7 @@ namespace LA3
     having  sum(a.GrossValue - amtPaid.Paid) >= {0}
     order by sum(a.GrossValue - amtPaid.Paid) desc
 ";
-            sql = String.Format(sql, debt);
+            sql = string.Format(sql, debt);
             var customerIds = db.Database.SqlQuery<int>(sql).ToList();
             return customerIds;
         }
@@ -77,7 +78,7 @@ namespace LA3
 	where	np.NextPaymentWasDue	< @cutoffDate
 	order by np.NextPaymentWasDue	asc
 ";
-            sql = String.Format(sql, weeks);
+            sql = string.Format(sql, weeks);
             var customerIds = db.Database.SqlQuery<int>(sql).ToList();
             return customerIds;
         }
