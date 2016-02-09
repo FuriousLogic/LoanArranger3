@@ -86,7 +86,7 @@ namespace LA3
             this.txtInvoiceCode.Location = new System.Drawing.Point(91, 4);
             this.txtInvoiceCode.Name = "txtInvoiceCode";
             this.txtInvoiceCode.Size = new System.Drawing.Size(100, 20);
-            this.txtInvoiceCode.TabIndex = 1;
+            this.txtInvoiceCode.TabIndex = 0;
             this.txtInvoiceCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInvoiceCode_KeyPress);
             // 
             // txtCustomerName
@@ -130,7 +130,7 @@ namespace LA3
             this.txtCustomerNotes.Multiline = true;
             this.txtCustomerNotes.Name = "txtCustomerNotes";
             this.txtCustomerNotes.Size = new System.Drawing.Size(207, 54);
-            this.txtCustomerNotes.TabIndex = 2;
+            this.txtCustomerNotes.TabIndex = 1;
             // 
             // label4
             // 
@@ -147,7 +147,7 @@ namespace LA3
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(207, 54);
-            this.txtNotes.TabIndex = 3;
+            this.txtNotes.TabIndex = 2;
             // 
             // label5
             // 
@@ -206,7 +206,7 @@ namespace LA3
             this.txtNetValue.Location = new System.Drawing.Point(413, 30);
             this.txtNetValue.Name = "txtNetValue";
             this.txtNetValue.Size = new System.Drawing.Size(143, 20);
-            this.txtNetValue.TabIndex = 4;
+            this.txtNetValue.TabIndex = 3;
             // 
             // label9
             // 
@@ -222,7 +222,7 @@ namespace LA3
             this.txtInterest.Location = new System.Drawing.Point(413, 56);
             this.txtInterest.Name = "txtInterest";
             this.txtInterest.Size = new System.Drawing.Size(143, 20);
-            this.txtInterest.TabIndex = 5;
+            this.txtInterest.TabIndex = 4;
             // 
             // label10
             // 
@@ -252,7 +252,7 @@ namespace LA3
             0});
             this.udPaymentPeriod.Name = "udPaymentPeriod";
             this.udPaymentPeriod.Size = new System.Drawing.Size(34, 20);
-            this.udPaymentPeriod.TabIndex = 6;
+            this.udPaymentPeriod.TabIndex = 5;
             // 
             // cmbPeriod
             // 
@@ -297,7 +297,7 @@ namespace LA3
             this.txtPayment.Location = new System.Drawing.Point(413, 161);
             this.txtPayment.Name = "txtPayment";
             this.txtPayment.Size = new System.Drawing.Size(143, 20);
-            this.txtPayment.TabIndex = 7;
+            this.txtPayment.TabIndex = 6;
             // 
             // label14
             // 
@@ -347,7 +347,7 @@ namespace LA3
             this.btnSave.Location = new System.Drawing.Point(480, 275);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 10;
+            this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -366,7 +366,7 @@ namespace LA3
             this.dtNextPayment.Location = new System.Drawing.Point(413, 187);
             this.dtNextPayment.Name = "dtNextPayment";
             this.dtNextPayment.Size = new System.Drawing.Size(143, 20);
-            this.dtNextPayment.TabIndex = 8;
+            this.dtNextPayment.TabIndex = 7;
             this.dtNextPayment.ValueChanged += new System.EventHandler(this.dtNextPayment_ValueChanged);
             // 
             // btnCustomer
